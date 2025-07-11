@@ -5,6 +5,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Você é Meu Amor</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .coracaozinho {
+      width: 28px;
+      height: auto;
+      vertical-align: middle;
+      margin-left: 5px;
+      border-radius: 8px;
+    }
+
+    @keyframes abrirCartao {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.7);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    #caixa-mensagem {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 25px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      max-width: 95%;
+      max-height: 90%;
+      text-align: center;
+      z-index: 1001;
+      opacity: 0;
+    }
+
+    #caixa-mensagem.aberta {
+      display: block;
+      animation: abrirCartao 0.4s ease forwards;
+    }
+
+    #caixa-mensagem img {
+      width: 220px;
+      max-width: 90vw;
+      border-radius: 20px;
+      display: block;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      user-select: none;
+    }
+
+    #mensagem-texto {
+      font-size: 1.2rem;
+      color: #e91e63;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin-bottom: 20px;
+      padding: 0 15px;
+    }
+
+    #fechar-mensagem {
+      padding: 10px 20px;
+      background: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    #fechar-mensagem:hover {
+      background: #c2185b;
+    }
+  </style>
 </head>
 <body>
 
@@ -22,14 +98,74 @@
 
   <!-- Conteúdo principal -->
   <div class="container">
-    <h1 class="frase">Oi, meu amor. Fiz isso aqui só pra você ver um pedacinho do meu amor por você,  Te amo muito, Letícia.💕</h1>
+    <h1 class="frase">
+      Oi, meu amor. Fiz isso aqui só pra você ver um pedacinho do meu amor por você, Te amo muito, Letícia.
+      <img src="imagens/leleh22.png" alt="Coração da Leleh" class="coracaozinho" />
+    </h1>
     <canvas id="click-particles"></canvas>
     <canvas id="hearts-canvas"></canvas>
   </div>
 
   <!-- Botão de música -->
-  <button id="toggle-music">🔈 Ligar Música</button>
+  <button id="toggle-music" style="
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  ">🔈 Ligar Música</button>
+
+  <!-- Cartinha -->
+  <img id="cartinha-topo" src="imagens/cartinha.png" alt="Cartinha" style="
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 70px;
+    height: auto;
+    cursor: pointer;
+    z-index: 1000;
+  " />
+
+  <!-- Caixa de mensagem com imagem personalizada -->
+  <div id="caixa-mensagem">
+    <img src="imagens/lele0.png" alt="Desenho Cartão" />
+    <div id="mensagem-texto">
+      Oi amor, passando aqui pra te dizer o tanto que eu amo você. Você literalmente chegou pra mudar minha vida, mudou pra melhor. Eu adoro nossos momentos, eu amo ficar junto contigo. E espero que a gente vá muito longe ainda. Você é a pessoa mais importante pra mim nesse momento. Adoro nossos momentos, Te amo muito.💖
+    </div>
+    <button id="fechar-mensagem">Fechar</button>
+  </div>
 
   <script src="script.js"></script>
+  <script>
+    const toggleBtn = document.getElementById('toggle-music');
+    const music = document.getElementById('bg-music');
+    let isPlaying = false;
+
+    toggleBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        music.pause();
+        toggleBtn.textContent = '🔈 Ligar Música';
+      } else {
+        music.play();
+        toggleBtn.textContent = '🔊 Música Tocando';
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // Lógica da cartinha
+    const cartinhaTopo = document.getElementById('cartinha-topo');
+    const caixaMensagem = document.getElementById('caixa-mensagem');
+    const fecharMensagem = document.getElementById('fechar-mensagem');
+
+    cartinhaTopo.addEventListener('click', () => {
+      caixaMensagem.classList.remove('aberta'); // remove se já tiver
+      void caixaMensagem.offsetWidth; // força reflow
+      caixaMensagem.classList.add('aberta'); // ativa animação
+    });
+
+    fecharMensagem.addEventListener('click', () => {
+      caixaMensagem.classList.remove('aberta');
+      caixaMensagem.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
