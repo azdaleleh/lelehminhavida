@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Você é Meu Amor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Música de fundo -->
+  <audio loop id="bg-music">
+    <source src="musicmp3/musica.mp3" type="audio/mpeg" />
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <!-- Vídeo de fundo -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="https://cdn.discordapp.com/attachments/1388724550774034643/1392969634868629585/4144a16f344829be86871c66506a37e6_720w.mp4" type="video/mp4" />
+    Seu navegador não suporta vídeo.
+  </video>
+
+  <!-- Conteúdo principal -->
+  <div class="container">
+    <h1 class="frase">Você é o motivo do meu sorriso, leleh. Te amo muito💕</h1>
+    <canvas id="click-particles"></canvas>
+    <canvas id="hearts-canvas"></canvas>
+  </div>
+
+  <!-- Botão de música -->
+  <button id="toggle-music">🔈 Ligar Música</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
