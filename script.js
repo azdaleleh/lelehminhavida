@@ -160,3 +160,21 @@ toggleBtn.addEventListener('click', () => {
     musicOn = false;
   }
 });
+
+// === Adicionando animação reset para a caixa de mensagem da cartinha ===
+
+const cartinhaTopo = document.getElementById('cartinha-topo');
+const caixaMensagem = document.getElementById('caixa-mensagem');
+const fecharMensagem = document.getElementById('fechar-mensagem');
+
+cartinhaTopo.addEventListener('click', () => {
+  caixaMensagem.style.display = 'block';
+  // Resetar animação para garantir que ela toque toda vez que abrir
+  caixaMensagem.style.animation = 'none';
+  void caixaMensagem.offsetWidth; // trigger reflow
+  caixaMensagem.style.animation = null;
+});
+
+fecharMensagem.addEventListener('click', () => {
+  caixaMensagem.style.display = 'none';
+});
